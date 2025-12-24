@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+
+# uv (保留 uv.lock，忽略 .venv)
+# uv.lock 应该提交到 git
+
+data/*
+!data/.gitkeep
+
+models/*
+!models/.gitkeep
+
+*.faiss
+*.index
+*.pkl
+*.pt
+*.bin
+*.safetensors
+
+streamlit_app.log
+

@@ -1,0 +1,58 @@
+paths:
+  data_dir: "data"
+
+dataset:
+  name: "enterprise_docs"
+
+ingest:
+  pdf_glob: "**/*.pdf"
+  image_max_per_page: 8
+  render_pages:
+    # 关键：把每一页渲染成图片写入 images.jsonl，从而“以文搜图”能命中矢量表格/图表
+    enabled: false
+    dpi: 200
+  ocr:
+    enabled: false
+    language: "ch"
+    min_text_chars: 80
+    page_render_dpi: 200
+
+chunking:
+  # char: 纯按字符滑窗切（鲁棒但容易切断条款）
+  # rule: 规则切块（优先按标题/条/编号列表切，再做长度控制；更适合企业制度/流程）
+  method: "rule"
+  target_chars: 900
+  overlap_chars: 150
+  min_chunk_chars: 120
+  cross_page:
+    # B1.1：跨页条款/列表常见。通过“桥接 chunk（上一页尾 + 下一页头）”提升命中与引用稳定性
+    enabled: true
+    tail_chars: 450
+    head_chars: 450
+    min_chars: 200
+
+models:
+  text_embedding:
+    # 多语言通用，适合企业中文文档
+    name: "BAAI/bge-m3"
+    batch_size: 32
+  image_embedding:
+    # 也可换成 google/siglip-base-patch16-224
+    name: "openai/clip-vit-large-patch14"
+    batch_size: 32
+  mllm:
+    enabled: false
+    name: "Qwen/Qwen2-VL-7B-Instruct"
+    max_new_tokens: 512
+
+retrieval:
+  top_k_text: 8
+  top_k_image: 6
+  fuse_k: 10
+  score_alpha: 0.55   # 文本权重；图片权重 = 1 - alpha
+  text_rerank:
+    # 企业制度/流程/条款类问答强烈建议开启：对文本召回 TopN 做交叉编码器重排
+    enabled: false
+    model: "BAAI/bge-reranker-v2-m3"
+    top_n: 30
+

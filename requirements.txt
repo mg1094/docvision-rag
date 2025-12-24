@@ -1,0 +1,30 @@
+# 基础
+numpy>=1.26.4
+pydantic>=2.7.0
+pyyaml>=6.0.1
+tqdm>=4.66.0
+rich>=13.7.1
+typer>=0.12.3
+
+# 文档解析
+pymupdf>=1.24.9
+pillow>=10.4.0
+
+# 向量检索
+faiss-cpu>=1.8.0.post1
+
+# Embedding / 模型（本地开源）
+transformers>=4.45.0
+accelerate>=0.33.0
+sentence-transformers>=3.0.1
+
+# Web Demo
+streamlit>=1.37.1
+
+# 可选：OCR（扫描件/图片）
+# paddleocr>=2.7.3
+# paddlepaddle-gpu 需按你的 CUDA 单独安装
+
+# 可选：更强检索质量
+# FlagEmbedding>=1.2.10     # bge-reranker / bge-m3 的另一套封装
+
