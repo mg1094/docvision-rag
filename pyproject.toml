@@ -1,5 +1,5 @@
 [project]
-name = "multimodal-ai"
+name = "docvision-rag"
 version = "0.1.0"
 description = "企业文档多模态 RAG（本地开源）- 学习型一条龙项目"
 readme = "README.md"

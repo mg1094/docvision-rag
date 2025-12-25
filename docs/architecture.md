@@ -390,7 +390,7 @@ retrieval:
 ## 目录结构
 
 ```
-multimodal_ai/
+docvision-rag/
 ├── app/
 │   └── streamlit_app.py      # Web UI
 ├── configs/
